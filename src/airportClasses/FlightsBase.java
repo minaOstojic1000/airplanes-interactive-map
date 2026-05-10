@@ -1,11 +1,10 @@
 package airportClasses;
 
-import java.util.List;
-import java.util.Vector;
+import java.util.ArrayList;
 
 public class FlightsBase {
 
-	private List<Flight> flightList = new Vector<>();
+	private ArrayList<Flight> flightList = new ArrayList<>();
 
 	private static FlightsBase instance;
 	
@@ -38,11 +37,11 @@ public class FlightsBase {
 		flightList.clear();
 	}
 
-	public List<Flight> getFlightList() {
+	public ArrayList<Flight> getFlightList() {
 		return flightList;
 	}
 
-	public void setAirList(List<Flight> flightList) {
+	public void setAirList(ArrayList<Flight> flightList) {
 		flightList.clear();
 		flightList.addAll(flightList);
 	}

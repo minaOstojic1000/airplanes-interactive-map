@@ -2,8 +2,10 @@ package airportClasses;
 
 import myExceptions.AirportDoesntExistException;
 import myExceptions.BadTimeFormatException;
+import shapes.BlinkingSquare;
+import shapes.MovingCircle;
 
-public class Flight {
+public class Flight implements Comparable<Flight>{
 	
 	private static int idAll = 1;
 	
@@ -15,6 +17,8 @@ public class Flight {
 	private int duration;
 	private int flightId = idAll++;
 	
+	private MovingCircle myCircle;
+	
 	public static Flight createFlight(char[] idCodeStart, char[] idCodeEnd, int startHour, int startMinute, int duration) 
 			throws AirportDoesntExistException, BadTimeFormatException {
 		checkTime(startHour, startMinute, duration);
@@ -24,7 +28,10 @@ public class Flight {
 	public static Flight createFlight(Airport startAirport, Airport endAirport, int startHour, int startMinute, int duration) 
 			throws AirportDoesntExistException, BadTimeFormatException {
 		Flight newInstance = new Flight(startAirport, endAirport, startHour, startMinute, duration);
+		newInstance.myCircle = new MovingCircle((int)startAirport.getX(), (int)startAirport.getY(), 
+				(int)endAirport.getX(), (int)endAirport.getY(), duration);
 		flights.add(newInstance);
+		startAirport.getFlights().add(newInstance);
 		return newInstance;
 	}
 	
@@ -87,9 +94,30 @@ public class Flight {
 	static public int getNextId() {
 		return idAll;
 	}
+	
+	public MovingCircle getMyCircle() {
+		return myCircle;
+	}
 
-	public static void main(String[] args) {
 
+	@Override
+	public int compareTo(Flight f) {
+		if (f == null)
+			return -1;
+		if (f.startHour == this.startHour && f.startMinute == this.startMinute)
+			return 0;
+		if (this.startHour < f.startHour)
+			return -1;
+		if (this.startHour == f.startHour && this.startMinute < f.startMinute)
+			return -1;
+		return 1;
+	}
+
+	@Override
+	public String toString() {
+		return "Flight " + flightId + ": [" + (startAirport != null ? "startAirport=" + String.copyValueOf(startAirport.getIdCode()) + ", " : "")
+				+ (endAirport != null ? "endAirport=" + String.copyValueOf(endAirport.getIdCode()) + ", " : "") + "hour=" + startHour
+				+ ", minute=" + startMinute + ", duration=" + duration + "]";
 	}
 
 }

@@ -1,7 +1,8 @@
 package airportClasses;
 
-import shapes.Square;
+import shapes.BlinkingSquare;
 import java.util.Arrays;
+import java.util.PriorityQueue;
 
 import myExceptions.AirportAlreadyExistsException;
 import myExceptions.CoordinateOutOfRangeException;
@@ -18,13 +19,14 @@ public class Airport {
 	private double x, y;
 	private double low = -90, high = 90;
 	
-	private Square mySquare;
+	private BlinkingSquare mySquare;
+	private PriorityQueue<Flight> flights = new PriorityQueue<>();
 	
 	public static Airport createAirport(String name, char[] idCode, double x, double y) 
 			throws CoordinateOutOfRangeException, IdCodeInvalidException, AirportAlreadyExistsException {
 		Airport newInstance = new Airport(name, idCode, x, y);
 		airports.add(newInstance);
-		newInstance.mySquare = new Square((int)x, (int)y, String.copyValueOf(idCode));
+		newInstance.mySquare = new BlinkingSquare((int)x, (int)y, String.copyValueOf(idCode));
 		return newInstance;
 	}
 	
@@ -116,8 +118,12 @@ public class Airport {
 		this.high = high;
 	}
 	
-	public Square getMySquare() {
+	public BlinkingSquare getMySquare() {
 		return mySquare;
+	}
+	
+	public PriorityQueue<Flight> getFlights() {
+		return flights;
 	}
 
 	@Override

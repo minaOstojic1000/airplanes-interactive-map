@@ -20,47 +20,47 @@ public abstract class Shape {
 	}
 	
 	
-	public int getWidth() {
+	public synchronized int getWidth() {
 		return width;
 	}
 
-	public void setWidth(int width) {
+	public synchronized void setWidth(int width) {
 		this.width = width;
 	}
 
-	public int getX() {
+	public synchronized int getX() {
 		return x;
 	}
 
 
 
-	public int getY() {
+	public synchronized int getY() {
 		return y;
 	}
 
 
 
-	public void setX(int x) {
+	public synchronized void setX(int x) {
 		this.x = x;
 	}
 
-	public void setY(int y) {
+	public synchronized void setY(int y) {
 		this.y = y;
 	}
 	
-	public Color getBoundColor() {
+	public synchronized Color getBoundColor() {
 		return boundColor;
 	}
 
-	public void setBoundColor(Color boundColor) {
+	public synchronized void setBoundColor(Color boundColor) {
 		this.boundColor = boundColor;
 	}
 
-	public Color getFillColor() {
+	public synchronized Color getFillColor() {
 		return fillColor;
 	}
 
-	public void setFillColor(Color fillColor) {
+	public synchronized void setFillColor(Color fillColor) {
 		this.fillColor = fillColor;
 	}
 

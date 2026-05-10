@@ -53,6 +53,10 @@ public class AppTimer extends Thread {
 		notify();
 	}
 	
+	public synchronized boolean works() {
+		return work;
+	}
+	
 	public synchronized void pause() {
 		work = false;
 	}

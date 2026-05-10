@@ -1,16 +1,13 @@
 package airportClasses;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Vector;
 
 import myExceptions.AirportAlreadyExistsException;
-import myExceptions.CoordinateOutOfRangeException;
-import myExceptions.IdCodeInvalidException;
 
 public class AirportsBase{
 	
-	private List<Airport> airList = new Vector<>();
+	private ArrayList<Airport> airList = new ArrayList<>();
 	
 	private static AirportsBase instance;
 	
@@ -45,7 +42,7 @@ public class AirportsBase{
 		airList.clear();
 	}
 
-	public List<Airport> getAirList() {
+	public ArrayList<Airport> getAirList() {
 		return airList;
 	}
 	
@@ -57,7 +54,7 @@ public class AirportsBase{
 		return null;
 	}
 
-	public void setAirList(List<Airport> airList) {
+	public void setAirList(ArrayList<Airport> airList) {
 		airList.clear();
 		airList.addAll(airList);
 	}

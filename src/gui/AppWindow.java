@@ -28,7 +28,9 @@ import java.awt.Dialog;
 
 public class AppWindow extends Frame {
 	
-	private AppTimer userActivity;
+	static private AppWindow instance;
+	
+	static private AppTimer userActivity;
 	
 	private Button inputAirport = new Button("Enter airport information");
 	private Button inputFlight = new Button("Enter flight information");
@@ -170,7 +172,13 @@ public class AppWindow extends Frame {
 		}
 	}
 	
-	public AppWindow() {
+	static public AppWindow Instance() {
+		if (instance == null)
+			instance = new AppWindow();
+		return instance;
+	}
+	
+	protected AppWindow() {
 		
 		setLocation(400, 100);
 		setResizable(true);
@@ -288,8 +296,12 @@ public class AppWindow extends Frame {
 		});
 	}
 	
+	static public AppTimer getTimer() {
+		return userActivity;
+	}
+	
 	public static void main(String[] args) {
-		new AppWindow();
+		AppWindow aw = Instance();
 	}
 
 }
